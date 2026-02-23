@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDG On Campus - CSMU</title>
+    <meta name="description"
+        content="Google Developer Groups On Campus - Chhatrapati Shivaji Maharaj University. Join us to learn, connect, and grow.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <div class="gdg-icon">
+                    <span class="bracket-left">&lt;</span><span class="bracket-right">&gt;</span>
+                </div>
+                <div class="logo-text">
+                    <span class="gdg">GDG</span>
+                    <span class="on-campus">On Campus</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#events">Events</a>
+                <a href="#about">About</a>
+            </nav>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn btn-outline">Login</button>
+                <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-bg-shapes">
+                <div class="shape shape-blue"></div>
+                <div class="shape shape-red"></div>
+                <div class="shape shape-green"></div>
+                <div class="shape shape-yellow"></div>
+            </div>
+            <div class="container hero-content">
+                <div class="hero-text-wrapper fade-in-up">
+                    <h1>Google Developer Groups</h1>
+                    <h2 class="gradient-text">On Campus</h2>
+                    <p class="subtitle">Chhatrapati Shivaji Maharaj University</p>
+                    <p class="description">Learn, Connect, and Grow together. Join the largest community of student
+                        developers exploring Google's latest technologies.</p>
+                    <div class="cta-group">
+                        <button id="joinHeroBtn" class="btn btn-primary btn-large">Become a Member</button>
+                        <a href="#events" class="btn btn-secondary btn-large">View Events</a>
+                    </div>
+                </div>
+                <div class="hero-visual fade-in">
+                    <div class="floating-cards">
+                        <div class="card float-1"><span class="tech-icon">📱</span> Android</div>
+                        <div class="card float-2"><span class="tech-icon">☁️</span> Cloud</div>
+                        <div class="card float-3"><span class="tech-icon">🤖</span> AI / ML</div>
+                        <div class="card float-4"><span class="tech-icon">🌐</span> Web</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="events-section pb-section pt-section">
+            <div class="container">
+                <div class="section-header fade-in-up scroll-animate">
+                    <h2>Upcoming Events</h2>
+                    <p>Discover workshops, hackathons, and study jams happening at CSMU.</p>
+                </div>
+                <div class="events-filter fade-in-up scroll-animate delay-1">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="workshop">Workshops</button>
+                    <button class="filter-btn" data-filter="hackathon">Hackathons</button>
+                    <button class="filter-btn" data-filter="seminar">Seminars</button>
+                </div>
+                <div class="events-grid fade-in-up scroll-animate delay-2" id="eventsGrid">
+                    <!-- Events will be populated dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section pb-section pt-section">
+            <div class="container">
+                <div class="about-content fade-in-up scroll-animate">
+                    <div class="about-text">
+                        <h2>Why Join GDG CSMU?</h2>
+                        <ul class="benefits-list">
+                            <li><span class="check">✓</span> Access to Google developer resources and platforms</li>
+                            <li><span class="check">✓</span> Mentorship from industry experts</li>
+                            <li><span class="check">✓</span> Hands-on workshops and project building</li>
+                            <li><span class="check">✓</span> Networking with a global community of developers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">
+                    <div class="logo-text">
+                        <span class="gdg">GDG</span> On Campus CSMU
+                    </div>
+                </div>
+                <p>Empowering student developers through technology, collaboration, and continuous learning.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#events">Events</a>
+                <a href="#about">About Us</a>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+                <a href="#">Discord</a>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2024 GDG On Campus CSMU. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-container slide-in">
+            <button class="close-btn" id="closeModal" aria-label="Close modal">&times;</button>
+            <div class="modal-left">
+                <div class="modal-branding">
+                    <div class="gdg-icon large">
+                        <span class="bracket-left">&lt;</span><span class="bracket-right">&gt;</span>
+                    </div>
+                    <h2>Community</h2>
+                    <p>Connect with fellow developers.</p>
+                </div>
+            </div>
+            <div class="modal-right">
+                <div class="modal-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="signup">Sign Up</button>
+                </div>
+
+                <div class="tab-content active" id="login-tab">
+                    <h3>Sign in</h3>
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" placeholder="student@csmu.ac.in" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full submit-btn">Login</button>
+                    </form>
+                    <div class="divider"><span>OR</span></div>
+                    <button class="btn btn-google btn-full">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                            alt="Google Logo">
+                        Continue with Google
+                    </button>
+                </div>
+
+                <div class="tab-content" id="signup-tab">
+                    <h3>Create Account</h3>
+                    <form id="signupForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email Address</label>
+                            <input type="email" id="signupEmail" placeholder="student@csmu.ac.in" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full submit-btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
