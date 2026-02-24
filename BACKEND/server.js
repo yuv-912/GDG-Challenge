@@ -18,7 +18,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/events', eventsRoutes);
 
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gdg-events')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gdg-events', {
+    serverSelectionTimeoutMS: 5000,
+    family: 4 // Use IPv4, skip IPv6 which sometimes causes ECONNREFUSED
+})
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
 

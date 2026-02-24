@@ -37,7 +37,10 @@ const eventsData = [
     }
 ];
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gdg-events')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gdg-events', {
+    serverSelectionTimeoutMS: 5000,
+    family: 4 // Use IPv4
+})
     .then(async () => {
         console.log('Connected to MongoDB');
 
