@@ -1,6 +1,6 @@
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:5000/api'
-    : 'https://gdg-backend.onrender.com/api'; // Fallback to Render URL once deployed
+    : 'https://gdg-challenge-1-fvsh.onrender.com/api'; // Render URL
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile Menu Toggle
