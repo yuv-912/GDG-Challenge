@@ -1,8 +1,12 @@
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000/api'
+    : 'https://gdg-backend.onrender.com/api'; // Fallback to Render URL once deployed
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const header = document.querySelector('header');
-    
+
     mobileMenuBtn.addEventListener('click', () => {
         header.classList.toggle('mobile-menu-open');
     });
@@ -17,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -28,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Scroll Animations (Intersection Observer)
     const fadeElements = document.querySelectorAll('.fade-in-up, .scroll-animate');
-    
+
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -67,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Event Listeners for Opening Modal
-    loginBtn.addEventListener('click', () => openModal('login'));
-    signupBtn.addEventListener('click', () => openModal('signup'));
-    if(joinHeroBtn) joinHeroBtn.addEventListener('click', () => openModal('signup'));
+    if (loginBtn) loginBtn.addEventListener('click', () => openModal('login'));
+    if (signupBtn) signupBtn.addEventListener('click', () => openModal('signup'));
+    if (joinHeroBtn) joinHeroBtn.addEventListener('click', () => openModal('signup'));
 
     // Event Listeners for Closing Modal
     closeModal.addEventListener('click', closeModalFunc);
@@ -113,69 +117,128 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Prevent Form Submission Refresh
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
+    // Check Authentication state
+    const updateAuthUI = () => {
+        const token = localStorage.getItem('token');
+        const userStr = localStorage.getItem('user');
+        const authButtonsContainer = document.querySelector('.auth-buttons');
+
+        if (token && userStr) {
+            const user = JSON.parse(userStr);
+            authButtonsContainer.innerHTML = `
+                <span style="margin-right: 15px; font-weight: 500;">Hi, ${user.name.split(' ')[0]}</span>
+                <button id="logoutBtn" class="btn btn-outline">Logout</button>
+            `;
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                updateAuthUI();
+            });
+            if (joinHeroBtn) joinHeroBtn.style.display = 'none';
+        } else {
+            authButtonsContainer.innerHTML = `
+                <button id="loginBtn" class="btn btn-outline">Login</button>
+                <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+            `;
+            document.getElementById('loginBtn').addEventListener('click', () => openModal('login'));
+            document.getElementById('signupBtn').addEventListener('click', () => openModal('signup'));
+            if (joinHeroBtn) joinHeroBtn.style.display = 'inline-flex';
+        }
+    };
+
+    updateAuthUI();
+
+    // Authentication Forms Submission
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Login functionality mock: Successful!');
-        closeModalFunc();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+            const res = await fetch(`${API_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                updateAuthUI();
+                closeModalFunc();
+                loginForm.reset();
+            } else {
+                alert(data.msg || 'Login failed');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('An error occurred during login');
+        }
     });
 
-    document.getElementById('signupForm').addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Signup functionality mock: Account Created!');
-        closeModalFunc();
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+
+        try {
+            const res = await fetch(`${API_URL}/auth/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password })
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                updateAuthUI();
+                closeModalFunc();
+                signupForm.reset();
+            } else {
+                alert(data.msg || 'Signup failed');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('An error occurred during signup');
+        }
     });
 
     // 5. Dynamic Events Data & Filtering
-    const eventsData = [
-        {
-            id: 1,
-            title: 'Intro to Google Cloud Platform',
-            date: 'Oct 15, 2024',
-            time: '2:00 PM - 5:00 PM',
-            tag: 'workshop',
-            tagColor: 'badge-blue', // Blue
-            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop'
-        },
-        {
-            id: 2,
-            title: 'Campus Hackathon 2024',
-            date: 'Nov 02 - Nov 03, 2024',
-            time: '48 Hours',
-            tag: 'hackathon',
-            tagColor: 'badge-green', // Green
-            image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600&auto=format&fit=crop'
-        },
-        {
-            id: 3,
-            title: 'Building with Gemini API',
-            date: 'Nov 12, 2024',
-            time: '3:00 PM - 4:30 PM',
-            tag: 'seminar',
-            tagColor: 'badge-yellow', // Yellow
-            image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop'
-        },
-        {
-            id: 4,
-            title: 'Android Compose Masterclass',
-            date: 'Nov 20, 2024',
-            time: '1:00 PM - 4:00 PM',
-            tag: 'workshop',
-            tagColor: 'badge-red', // Red
-            image: 'https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&w=600&auto=format&fit=crop'
-        }
-    ];
+    let eventsData = [];
 
     const eventsGrid = document.getElementById('eventsGrid');
     const filterBtns = document.querySelectorAll('.filter-btn');
 
-    const renderEvents = (filter = 'all') => {
-        // Clear grid
+    const renderEvents = async (filter = 'all') => {
+        // Clear grid and show loading state if eventsData is empty
+        if (eventsData.length === 0) {
+            eventsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading events...</p>';
+            try {
+                const res = await fetch(`${API_URL}/events`);
+                if (res.ok) {
+                    eventsData = await res.json();
+                } else {
+                    eventsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">Failed to load events.</p>';
+                    return;
+                }
+            } catch (err) {
+                console.error('Error fetching events:', err);
+                eventsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">Error connecting to server.</p>';
+                return;
+            }
+        }
+
         eventsGrid.innerHTML = '';
-        
+
         // Filter elements
-        const filteredEvents = filter === 'all' 
-            ? eventsData 
+        const filteredEvents = filter === 'all'
+            ? eventsData
             : eventsData.filter(event => event.tag === filter);
 
         if (filteredEvents.length === 0) {
@@ -220,11 +283,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Use a slight timeout to ensure CSS is loaded and animations run smoothly
     setTimeout(() => {
         renderEvents();
-        
+
         // Ensure initial elements in viewport trigger animation
         document.querySelectorAll('.fade-in-up').forEach(el => {
             const rect = el.getBoundingClientRect();
-            if(rect.top < window.innerHeight) {
+            if (rect.top < window.innerHeight) {
                 el.classList.add('visible');
             }
         });

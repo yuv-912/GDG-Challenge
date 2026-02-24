@@ -1,0 +1,8 @@
+[build]
+  publish = "FRONTEND"
+  command = "" # No build step since it's just static files
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
