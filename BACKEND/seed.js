@@ -5,15 +5,15 @@ const Event = require('./models/Event');
 const eventsData = [
     {
         title: 'Intro to Google Cloud Platform',
-        date: 'Oct 15, 2024',
+        date: 'Mar 15, 2026',
         time: '2:00 PM - 5:00 PM',
         tag: 'workshop',
         tagColor: 'badge-blue',
         image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop'
     },
     {
-        title: 'Campus Hackathon 2024',
-        date: 'Nov 02 - Nov 03, 2024',
+        title: 'Campus Hackathon 2026',
+        date: 'Apr 02 - Apr 03, 2026',
         time: '48 Hours',
         tag: 'hackathon',
         tagColor: 'badge-green',
@@ -21,7 +21,7 @@ const eventsData = [
     },
     {
         title: 'Building with Gemini API',
-        date: 'Nov 12, 2024',
+        date: 'Apr 12, 2026',
         time: '3:00 PM - 4:30 PM',
         tag: 'seminar',
         tagColor: 'badge-yellow',
@@ -29,7 +29,7 @@ const eventsData = [
     },
     {
         title: 'Android Compose Masterclass',
-        date: 'Nov 20, 2024',
+        date: 'Apr 20, 2026',
         time: '1:00 PM - 4:00 PM',
         tag: 'workshop',
         tagColor: 'badge-red',
