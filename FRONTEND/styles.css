@@ -856,15 +856,17 @@ ul {
 
 .modal-branding {
     text-align: center;
+    color: #202124;
+    /* Force dark text on the light background gradient */
 }
 
 .modal-branding h2 {
     margin: 1.5rem 0 0.5rem;
+    color: #202124;
 }
 
 .modal-branding p {
-    color: var(--text-primary);
-    /* Changed to primary to ensure visibility on light gradient background */
+    color: #5f6368;
 }
 
 .modal-right {
