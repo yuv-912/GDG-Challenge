@@ -264,15 +264,16 @@ ul {
     left: 0;
     width: 100%;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(218, 220, 224, 0.4);
+    background: transparent;
+    border-bottom: 1px solid transparent;
     transition: var(--transition);
 }
 
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: var(--glass-border);
     box-shadow: var(--shadow-sm);
 }
 
@@ -1176,11 +1177,12 @@ ul {
     transform: rotate(15deg) scale(1.1);
 }
 
-.card,
-.navbar.scrolled {
+.card {
     background: var(--glass-bg);
     border-color: var(--glass-border);
 }
+
+
 
 .event-card {
     background: var(--surface-color);
