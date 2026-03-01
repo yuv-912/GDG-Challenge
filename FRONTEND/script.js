@@ -292,33 +292,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, 100);
-    // 6. Custom Cursor Logic
-    const cursor = document.getElementById('custom-cursor');
-    const cursorFollower = document.getElementById('custom-cursor-follower');
-
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-
-        // Follower has a slight delay handled by CSS transition, we just update position
-        setTimeout(() => {
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
-        }, 50);
-    });
-
-    const hoverElements = document.querySelectorAll('a, button, .menu-toggle, .filter-btn, .event-card, .tab-btn');
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('hover');
-            cursorFollower.classList.add('hover');
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('hover');
-            cursorFollower.classList.remove('hover');
-        });
-    });
-
     // 7. Theme Toggle Logic
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const sunIcon = themeToggleBtn.querySelector('.sun-icon');

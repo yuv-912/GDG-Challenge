@@ -1067,11 +1067,21 @@ ul {
     }
 
     .hero-text-wrapper h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .hero-text-wrapper h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .hero-text-wrapper .subtitle,
+    .hero-text-wrapper .description {
+        font-size: 1rem;
+    }
+
+    .floating-cards {
+        transform: scale(0.6);
+        margin-top: -2rem;
     }
 
     .footer-content {
@@ -1136,50 +1146,6 @@ ul {
     transition: background-color 0.5s ease;
 }
 
-body {
-    cursor: none; /* Hide default cursor */
-}
-
-a, button, .menu-toggle, .filter-btn, .event-card, .tab-btn {
-    cursor: none; 
-}
-
-.custom-cursor {
-    width: 8px;
-    height: 8px;
-    background: var(--gdg-blue);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
-}
-
-.custom-cursor-follower {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--gdg-blue);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out, width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
-}
-
-.custom-cursor.hover {
-    width: 12px;
-    height: 12px;
-}
-
-.custom-cursor-follower.hover {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(66, 133, 244, 0.1);
-    border-color: transparent;
-}
-
 .nav-controls {
     display: flex;
     align-items: center;
@@ -1193,7 +1159,7 @@ a, button, .menu-toggle, .filter-btn, .event-card, .tab-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: none;
+    cursor: pointer;
     padding: 0.5rem;
     border-radius: 50%;
     transition: var(--transition);
@@ -1204,7 +1170,8 @@ a, button, .menu-toggle, .filter-btn, .event-card, .tab-btn {
     transform: rotate(15deg) scale(1.1);
 }
 
-.card, .navbar.scrolled {
+.card,
+.navbar.scrolled {
     background: var(--glass-bg);
     border-color: var(--glass-border);
 }
