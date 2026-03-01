@@ -592,7 +592,8 @@ ul {
     border-radius: var(--radius-full);
     font-family: var(--font-heading);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: #5f6368;
+    /* Hardcoded light mode secondary text color to ensure contrast against white background */
     cursor: pointer;
     transition: var(--transition);
 }
