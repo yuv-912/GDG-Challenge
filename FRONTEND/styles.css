@@ -215,13 +215,16 @@ ul {
 
 .btn-secondary {
     background-color: white;
-    color: var(--text-primary);
+    color: #202124;
+    /* Hardcode to dark text to always be visible on white bg */
     border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
     background-color: var(--surface-color);
     border-color: var(--gdg-blue);
+    color: #202124;
+    /* Keep text dark on hover */
     transform: translateY(-2px);
 }
 
@@ -340,8 +343,10 @@ ul {
 
 .nav-links a {
     font-family: var(--font-heading);
-    font-weight: 500;
-    color: var(--text-secondary);
+    font-weight: 600;
+    /* Increased font weight slightly */
+    color: var(--text-primary);
+    /* Changed from secondary to primary for better contrast */
     transition: var(--transition);
     position: relative;
 }
@@ -856,7 +861,8 @@ ul {
 }
 
 .modal-branding p {
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    /* Changed to primary to ensure visibility on light gradient background */
 }
 
 .modal-right {
